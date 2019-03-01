@@ -1,0 +1,135 @@
+React is a framework 
+	Elements and JSX
+	Components
+	component state
+	Components props ={}
+
+	How react fits in to the web development.
+
+
+index.html
+
+	<body>
+		<div id = "root"></div>
+	</body>
+
+	now create index.js
+
+	import React from "react";
+	import ReactDOM from "react-dom";
+
+	ReactDOM.render("App", document.getElementById("root"));
+
+	State is an updatable structure available for the component 
+	can track How many times clicked on component can be done by state
+
+
+In React we should not direcltly modify the component of an object its a bad practise 
+
+
+class App extends Component{
+    constructor(){
+        super();
+        this.state = {displayBio : false};
+    }
+
+    readMore(){
+        this.state.displayBio = true;  // This is bad method
+
+    }
+    render(){
+          return (
+              <div>
+                <h1>I am from component class</h1>
+                <p> Hello World </p>
+                {
+                    this.state.displayBio ? (<div>
+                        <p>I live in san faransic and code every day</p>
+                        <p>Besides coding I do nothing</p>
+                        <p>My Fav is Godzilla</p>
+                        </div>) : (
+                            <div>
+                                <button>Read More</button>
+                            </div>
+                        )
+                }
+              </div>
+          )
+    }
+}
+
+
+If the varaibles of one method in a class want to use in another method then we have to bind the method inside the method which we are sharing the variables
+
+EX: 
+
+  constructor(){
+        super();
+        this.state = {displayBio : false};
+        console.log('Component', this);
+        this.readMore = this.readMore.bind(this);
+    }
+
+  readMore(){
+    this.setState ({displayBio : true});
+    console.log('readMore', this)
+    }
+
+       {
+                    this.state.displayBio ? (<div>
+                        <p>I live in san faransic and code every day</p>
+                        <p>Besides coding I do nothing</p>
+                        <p>My Fav is Godzilla</p>
+                        </div>) : (
+                            <div>
+                                <button onClick = {this.readMore}>Read More</button>
+                            </div>
+                        )
+                }
+
+
+Never directly update the state 
+
+constructor(){
+        super();
+        this.state = {displayBio : false};
+        console.log('Component', this);
+        this.toogleDisplay = this.toogleDisplay.bind(this);
+    }
+
+    toogleDisplay(){
+        this.setState({displayBio: !this.state.displayBio}); // this is the bad way
+    }
+
+
+
+render(){
+	return (
+	{
+                    this.state.displayBio ? (<div>
+                        <p>I live in san faransic and code every day</p>
+                        <p>Besides coding I do nothing</p>
+                        <p>My Fav is Godzilla</p>
+                        <button onClick={this.toogleDisplay}>Show Less</button>
+                        </div>) : (
+                            <div>
+                                <button onClick = {this.toogleDisplay}>Read More</button>
+                            </div>
+                        )
+                })
+}
+
+
+The above is the bad example 
+
+React recalls render() at the end of the setState()
+
+
+    state = {displayBio : false};
+
+    toogleDisplay = () =>{
+        this.setState({displayBio: !this.state.displayBio});
+    }
+
+
+    This does the same 

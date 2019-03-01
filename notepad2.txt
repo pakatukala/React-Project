@@ -1,0 +1,12 @@
+Necessity of Bundlers and Transpilers
+	
+	Bundlers
+		-- consists of multiple js files makes one -- parcel is kind of bundler 
+		-- there are other bundlers webpack, browser5 
+
+		we can write the imports in js to avoid messup in HTML injection of src = index.js
+
+	Transpilers
+		-- Babel - converts JSX to browser understandable to browsers
+
+		JSX -- <div></div>  converts to React.createElement('div', null, 'React element')
