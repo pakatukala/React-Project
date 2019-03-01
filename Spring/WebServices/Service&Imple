@@ -1,0 +1,33 @@
+public interface UserService {
+	UserDTO createUser(UserDTO user);
+}
+
+This above interface class will have the implementation class 
+
+@Service
+public class UserServiceImpl implements UserService{
+	
+		@Autowired
+		UserRepository userRepo;
+
+	public UserDTO createUser(UserDTO user){
+
+		UserEntity userEntity = new UserEntity();
+		BeanUtils.copyProperties(user, UserEntity);
+		userEntity.setEncryptedPassword("test");
+		userEntity.setUserID("testUSerId");
+
+		userEntity storeValues = userRepo.save(userEntity);
+		UserDTO returnedValues = new UserDTO();
+		BeanUtils.copyProperties(storevalues, returnedValues);
+
+	}
+}
+
+
+Now create an Interface for the Repository which will have the CrudRepository<T, V>
+
+
+public interface UserRepository implements CrudRepository<UserEntity, Long>{
+	
+}

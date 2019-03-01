@@ -10,3 +10,23 @@ Necessity of Bundlers and Transpilers
 		-- Babel - converts JSX to browser understandable to browsers
 
 		JSX -- <div></div>  converts to React.createElement('div', null, 'React element')
+
+		ReactDOM.render(<div />, document.);
+
+	DOM - is an API Document object Model
+		-- allows to manipulate HTML represents to Tree like structure 
+
+
+LifeCycle methods
+	-- it will be in different phases of the component life
+	-- ReactDOM.render()
+
+	componentDidMount()
+	componentWillUnmount()
+
+Stateless component class
+
+
+HTTP 
+	-- How the messages over the web formatted
+	

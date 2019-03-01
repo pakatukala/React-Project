@@ -1,0 +1,27 @@
+Spring Boot is a standalone application no need to deploy anywhere. Tomcat is already available inside
+
+Spring boot application doesnt support the jsp need to update the tomcat embed jasper dependency in pom.xml
+
+
+Spring Boot Webservice
+
+A service on web, for machine consumption
+
+Google is human consumption
+
+A webservice will have multiple microservices with in the webservice other software will use your web service - Other softwares might depend on your service
+
+Microservice
+
+BlogApp -> 
+	Resource is a source perform operations view, add, delete, update etc.,
+
+Webservices Micro services rules
+
+Posts -> URL patterns are
+
+operations 			Methods 		URL patterns
+View all 			GET				/posts
+view specific		GET				/posts/id
+add 				POST 			/posts
+update 				PUT 			/posts

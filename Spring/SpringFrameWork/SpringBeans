@@ -1,0 +1,119 @@
+Spring is the most popular java Framework
+
+Inner Bean
+	<property name="currentOffer">
+	<bean id="offers" class="org.study.com.Offers"></bean>
+	</property>
+	</bean>
+
+Outer Bean
+	<property name="currentOffer" ref = "offers">
+	</property>
+	<bean id="offers" class="org.study.com.Offers"></bean>
+	</bean>
+
+
+What is Bean
+	--Spring beans are just instances that are managed by the spring IoC (Inversion of Control)
+
+Bean Scopes
+	--Singleton Scope is the default only single object instnace created
+	--prototye -- multiple object instances are created
+	--request, session -- 
+				-- used in webapplications, spring mvc 
+
+Bean scope set up
+
+Spring Framework Annotation
+	--Annotations are like markers, which give some additional information of the element to the compiler.
+	and the compiler will complile the program accordingly
+
+Example 
+
+public class bikeInsurance implements Insurance {
+	@Override
+	public String showStatus() {
+		return "Your Bike is Insured";
+	}
+}
+
+In this particular Example @Override is the annotation is also called as the marker 
+The annotation will give the additional information of the element 
+These annotation are readily available
+
+Why Annotation
+	Spring is dependent on XML configuratio if the project is long and has many XML files bit confusion
+	When use other Framework JSF spring is bit complex it is little complex when we are debuggin the spring framework we can reduce the dependency of the configurationa and convinient to use by using annotations
+
+Internal working of the annotation and how spring deals with the annotation
+	--Creating an object to the application context and will get the bean from the XML 
+	--<context:component-scan base-package = "org.study.com.spring"> context is the application container 
+
+Interal working when there is a scenario of the component scan with the bean 
+	--annotation-config-
+	<context:application-config/>
+	@Component
+	@Autowired
+	Spring bean life cycle
+for init we use @PostConstruct
+for destroy we use @PreDestroy
+
+
+SPEL Language
+	--Spring Expression Language - 
+
+	<property name="currentOffer" value="#{'no Value'}"></property>
+	value="#{'no Value'}" - is the spring expression language where you can do wonders with all operations to this value
+	<property name="currentOffer" value="#{'Offer IND :' +offers.getOfferIND()}"></property>
+
+
+Spring Configuration
+		--Pure XML Configuration 
+		--XML and Annotations
+			<context:annotation-congif />
+		--Another XML and Annotations
+			<context:component-scan base-package="" />
+		--Pure Annotation
+			--No need of the XML file 
+
+
+Pure Annotation we use 
+
+	App.Config.java
+
+	@Configuration
+@PropertySource("classpath:org/study/properties/offersList.properties") //This is for reading a file called offersList.properties
+public class AppConfig {
+	
+	//This is used to execute the @PropertySource 
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer
+	PropertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	//This is to inject the Propety
+	@Bean
+	public Offer currentOffer() {
+		return new Offer();
+	}
+
+	//This is the Oject of the particular class
+	@Bean("myInsurance")
+	public BikeInsurance myInsurance() {
+		return new BikeInsurance(currentOffer());
+	}
+}
+
+
+Field Injection for the @PropertyScan
+
+ 	//@Value("${offers.IND}")
+	public String currentOffer = "new Offers";
+
+Other wise
+
+	@Autowired
+	public void setCurrentOffer(@Value("${offers.IND}") String currentOffer) {
+		this.currentOffer = currentOffer;
+	}

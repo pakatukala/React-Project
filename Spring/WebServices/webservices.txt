@@ -1,0 +1,157 @@
+Web Services
+SOAP web service and Rest
+
+SOAP(JAX-WS java API for XML web service)
+	--Simple object Access protocol 
+	-- Newer version of java11 isnot supported
+	Only XML out put 
+
+Rest(JAX-rs JAVA API RESTful webservice)
+	--Representaional state transfer webservice
+	--Light Weight 
+	JSON and XML it can be text or anything 
+
+A webservice available on network and uses a standardized messaging system.
+
+Why webservice
+	The webservice is the channel between the user and the DB will have the limited access to the DB.
+
+Overview
+	-- Standard Application where all the services are available no need to access the network 
+	-- When come to web services the client can access the webservices will deploy over network and the client can access the services over the network 	
+	-- A service can be independent then its a microserive is a strong dominating 
+
+Website is a service on network when you visit two way communication 
+
+Webservice  --  Cilent will communicate with the API (classes, methods Standard DATA) is for machine consumption 
+
+HTTP protocol is used to communicate the webservices over the network
+
+
+URI patterns -- 
+
+Example Scenario 
+
+ACTION BASED URI's
+Showroom there are multiple bikes different brands also provides differnt spare parts based on the brand. 
+		
+		Showroom -> Brands 
+					  ^
+					/	\
+				   |	 |
+			   Bikes	 Spares 
+
+			  URI patterns we get INFO and SET info 
+
+			  Ex. One to many what all brands bikes available in showroom /getBikes
+			  Ex. One to many what all brands brands available in showroom /getBrands
+			  /getBikes?brand = honda
+			  /getSpared?brand = suzuki
+			  /getSpare?id = 25
+
+			 If you want to set some information of the bikes in the DB
+
+			 /setBrands
+			 /setBikes
+
+These are not Resource based URIS they are action based URI's 
+
+
+Resource Based URIS
+
+List down all the brands /Brands
+List down specific brands /Brands/bajaj
+Specific Resorce id /Spare/25
+
+
+There is an issue there is no action in the URI no set and get 
+Then client no need to know about the get set they should know about methods called HTTP method
+how client software know failure or success known as HTTP status codes
+
+Status codes 
+
+200OK if everything is good
+404 Not found -- URL non exsit then is issue will return 
+500 Internal server error
+
+1XX - Informational
+2XX - Successful
+3XX - Redirection
+4XX - Client Error 
+5XX - Server Error 
+
+more about resources based URI 
+
+File based links are also known as static links
+
+Resource based links called dynamic links 
+
+Collection URI 
+
+Travel.com/cities -> collection of all cities 
+
+Filter based URI
+
+List down all cities starts with M 
+
+Travel.com/cities/startswith=m etc., 
+
+
+
+URI relationships
+ 
+REST Responses
+	Which we get from REST server
+	Cient and SERVER information transfer between the we can represent info in different forms
+	Representation is on HTTP based on 1.0 we have to use HTTP in REST
+
+JSON javaScript object Notation 
+XML 
+
+
+HATEOAS
+	Hypermedia as the engine of the application state 
+		--Hyper Text that contains links to other text 
+		--Hyper Media is the extension of hypertext text, audio, image, image, txt etc, 
+
+
+Richardson maturity model 
+	Fill Restful
+	No Restful
+	Partial
+
+Level 0 - Not a Restful API -- Not Restful
+	Not uses URI, HTTP methods, and HATEOAS capabilities
+	Single URI and singele HTTP method is used 
+	transfers SOAP bases payloads 
+	uses plain old XML(POX)
+	Actions in inside the request body - in XML complex scenarios 
+	Ex - URI http://showroom/manage is the URL is a messi API 
+
+Level 1 Multiple URI and Single VERB  VERBS are (get, post, put, delete) PArtial REST
+	Makes uses of URI based resource
+	/cars, /brands
+	Single HTTP verb, usually POST we will perform the action will be inside your request 
+
+Level 2 Multilple URI and VERBS PARTIAL REST
+	 
+	 HTTP verbs, methods 
+
+Level 3 multiple URIS and methods  and HATEOAS concepts Fully Restful APIS  -- FULLY RESTFUL 
+
+JAX rs is the specificaation, Annotation and interfaces to build RESTful API
+
+Implementation part is different 
+
+JAX - RS 
+
+JAX-rs sit between Application and Implementation 
+
+Implementation part may be some thrid party providers like Apache CXF, Jersy,  RESt easy. REsetlet etc, implement JAXrs (specification will come along with the implementation of the third party). 
+
+http://www.pavan.com/api/users/?start=1&limit=50
+
+api, users are the resources and you can call it as the URI's  
+
+
+

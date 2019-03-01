@@ -1,0 +1,116 @@
+How we create and applicatin that develops RestFul webservices Sping boot
+
+First of all 
+	First of all create an Entity class that will have the values exactly mactches the Database
+
+	pubic class UserEntity implements Serializable{
+		private static fial long serialVersionId = 1L;
+
+		@Id
+		@GeneratedValue  //To get this annotations need to update the POM.XML wil JPA 
+		//This is the ID in the data base will have the auto increment values
+		private long id;
+
+		@Column(nullable = false, lenght = 50)
+		private String userId;
+
+		@Column(nullable = false, lenght = 50)
+		private String firstName;
+
+		@Column(nullable = false, length = 120)
+		private String email;
+
+		@Column(nullable = false)
+		private String encryptedPassword;
+
+		private String emailVerificationToken;
+
+		@Column(nullable = false, columnDefinition = "boolean default user")
+		private Booelan emailVerificationStatus = false;
+
+		Create Getters and Setters for all the variables in this class 
+	}
+
+
+	Now Create a HomeController.java
+
+
+	@RestController
+	@RequestMapping("users")
+	public class HomeController{
+
+		@GetMapping
+		public String getUser(){
+			retunr "Hello World";
+		}
+
+		@PostMapping
+		public String createUser(){
+
+			return "Hello world";
+		}
+	}
+
+	The Post method will get the information as JSON format this JSON format need to be store in a RequestModel
+
+This RequestModel will have the fields that are only entered in JSON format 
+	{ 
+
+		"firstName" : "Pavan",
+		"lastName" : "Katukala",
+		"email" : "test@test.com",
+		"password" : "password";
+
+	}
+
+Now we have to develop an Model class which will have only these fields
+		
+
+		UserDetailsRequestModel.java
+
+
+pubic class UserDetailsRequestModel{
+	 	
+	 	private String firstName;
+	 	private String lastName;
+	 	private String email;
+	 	private String password;
+
+	 	Now create Getters and Setters for this class with the fileds
+}
+
+
+Now the JSON format from UserDetailsRequest Need to be converted to the Java Object 
+Here we have to create Response Model
+
+	UserResponseModel.java
+
+	pubic class UserResponseModel{
+	 	
+	 	private String firstName;
+	 	private String lastName;
+	 	private String email;
+	 	private String password;
+
+	 	Now create Getters and Setters for this class with the fileds
+}
+
+
+Now update the HomeController.java
+	
+	
+	UserService userService = new UserService();
+
+	@PostMapping 
+	public UserResponseModel createUser(@RequestBody UserDetailsRequestModel 	userRequest){
+
+				UserResponseModel returnValue = new UserResponseModel();
+				UserDTO userDto = new UserDTO();
+				BeanUtils.copyProperties(userRequest, userDto);
+
+				UserResponseModel createdValue = userSerivce.createUser(userDto);
+				BeanUtils.copyProperties(createdValue, returnValue);
+				return returnValue;
+	}
+
+
