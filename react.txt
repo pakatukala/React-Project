@@ -133,3 +133,5 @@ React recalls render() at the end of the setState()
 
 
     This does the same 
+    
+    npm config set strict-ssl = false
